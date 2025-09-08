@@ -35,6 +35,7 @@ const App = () => {
   const isKeyboardEnable = useAtomValue(isKeyboardEnableAtom);
   const setResolution = useSetAtom(resolutionAtom);
   const setFrameRate = useSetAtom(frameRateAtom);
+  const setScale = useSetAtom(videoScaleAtom);
 
   const [isLoading, setIsLoading] = useState(true);
   const [isCameraAvailable, setIsCameraAvailable] = useState(false);
@@ -47,6 +48,10 @@ const App = () => {
     const frameRate = storage.getVideoFrameRate();
     if (frameRate) {
       setFrameRate(frameRate);
+    }
+    const scale = storage.getVideoScale();
+    if (scale) {
+      setScale(scale);
     }
 
     requestMediaPermissions(resolution);

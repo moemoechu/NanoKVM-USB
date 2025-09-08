@@ -5,7 +5,7 @@ const VIDEO_DEVICE_ID_KEY = 'nanokvm-usb-video-device-id';
 const VIDEO_RESOLUTION_KEY = 'nanokvm-usb-video-resolution';
 const CUSTOM_RESOLUTION_KEY = 'nanokvm-usb-custom-resolution';
 const VIDEO_FRAMERATE_KEY = 'nanokvm-usb-video-framerate';
-const VIDEO_SCALE_KEY = 'nanokvm-usb-video-scale'
+const VIDEO_SCALE_KEY = 'nanokvm-usb-video-scale';
 const IS_MENU_OPEN_KEY = 'nanokvm-is-menu-open';
 const MOUSE_STYLE_KEY = 'nanokvm-usb-mouse-style';
 const MOUSE_MODE_KEY = 'nanokvm-usb-mouse-mode';
@@ -69,15 +69,15 @@ export function setVideoFrameRate(frameRate: number) {
 }
 
 export function getVideoScale(): number | null {
-  const scale = localStorage.getItem(VIDEO_SCALE_KEY)
+  const scale = localStorage.getItem(VIDEO_SCALE_KEY);
   if (scale && Number(scale)) {
-    return Number(scale)
+    return Number(scale);
   }
-  return null
+  return null;
 }
 
 export function setVideoScale(scale: number): void {
-  localStorage.setItem(VIDEO_SCALE_KEY, String(scale))
+  localStorage.setItem(VIDEO_SCALE_KEY, String(scale));
 }
 
 export function getIsMenuOpen(): boolean {

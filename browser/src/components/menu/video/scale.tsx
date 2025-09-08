@@ -1,27 +1,27 @@
-import { ReactElement, useEffect } from 'react'
-import { Popover, Slider } from 'antd'
-import { useAtom } from 'jotai'
-import { ScalingIcon } from 'lucide-react'
-import { useTranslation } from 'react-i18next'
+import { ReactElement, useEffect } from 'react';
+import { Popover, Slider } from 'antd';
+import { useAtom } from 'jotai';
+import { ScalingIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { videoScaleAtom } from '@/jotai/device.ts';
 import * as storage from '@/libs/storage';
 
 export const Scale = (): ReactElement => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
-  const [videoScale, setVideoScale] = useAtom(videoScaleAtom)
+  const [videoScale, setVideoScale] = useAtom(videoScaleAtom);
 
   useEffect(() => {
-    const scale = storage.getVideoScale()
+    const scale = storage.getVideoScale();
     if (scale) {
-      setVideoScale(scale)
+      setVideoScale(scale);
     }
-  }, [])
+  }, []);
 
   async function updateScale(scale: number): Promise<void> {
-    setVideoScale(scale)
-    storage.setVideoScale(scale)
+    setVideoScale(scale);
+    storage.setVideoScale(scale);
   }
 
   const content = (
@@ -43,16 +43,14 @@ export const Scale = (): ReactElement => {
         onChange={updateScale}
       />
     </div>
-  )
+  );
 
   return (
     <Popover content={content} placement="rightTop" arrow={false} align={{ offset: [13, 0] }}>
-      <div className="flex h-[30px] cursor-pointer items-center space-x-1 rounded px-3 text-neutral-300 hover:bg-neutral-700/50">
-        <div className="flex h-[14px] w-[20px] items-end">
-          <ScalingIcon size={16} />
-        </div>
-        <span>{t('video.scale')}</span>
+      <div className="flex h-[30px] cursor-pointer items-center space-x-2 rounded px-3 text-neutral-300 hover:bg-neutral-700">
+        <ScalingIcon size={18} />
+        <span className="select-none text-sm">{t('video.scale')}</span>
       </div>
     </Popover>
-  )
-}
+  );
+};
