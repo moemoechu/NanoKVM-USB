@@ -10,6 +10,8 @@ export const resolutionAtom = atom<Resolution>({
   height: 1080
 });
 
+export const frameRateAtom = atom<number>(30);
+
 export const videoScaleAtom = atom<number>(1.0)
 
 export const videoDeviceIdAtom = atom('');

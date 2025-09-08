@@ -4,6 +4,7 @@ const LANGUAGE_KEY = 'nanokvm-usb-language';
 const VIDEO_DEVICE_ID_KEY = 'nanokvm-usb-video-device-id';
 const VIDEO_RESOLUTION_KEY = 'nanokvm-usb-video-resolution';
 const CUSTOM_RESOLUTION_KEY = 'nanokvm-usb-custom-resolution';
+const VIDEO_FRAMERATE_KEY = 'nanokvm-usb-video-framerate';
 const VIDEO_SCALE_KEY = 'nanokvm-usb-video-scale'
 const IS_MENU_OPEN_KEY = 'nanokvm-is-menu-open';
 const MOUSE_STYLE_KEY = 'nanokvm-usb-mouse-style';
@@ -55,6 +56,16 @@ export function setCustomResolution(width: number, height: number) {
 
 export function removeCustomResolutions() {
   localStorage.removeItem(CUSTOM_RESOLUTION_KEY);
+}
+
+export function getVideoFrameRate() {
+  const frameRate = localStorage.getItem(VIDEO_FRAMERATE_KEY);
+  if (!frameRate) return;
+  return Number(frameRate);
+}
+
+export function setVideoFrameRate(frameRate: number) {
+  localStorage.setItem(VIDEO_FRAMERATE_KEY, String(frameRate));
 }
 
 export function getVideoScale(): number | null {

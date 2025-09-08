@@ -11,6 +11,7 @@ import { Menu } from '@/components/menu';
 import { Mouse } from '@/components/mouse';
 import { VirtualKeyboard } from '@/components/virtual-keyboard';
 import {
+  frameRateAtom,
   resolutionAtom,
   serialStateAtom,
   videoScaleAtom,
@@ -33,6 +34,7 @@ const App = () => {
   const serialState = useAtomValue(serialStateAtom);
   const isKeyboardEnable = useAtomValue(isKeyboardEnableAtom);
   const setResolution = useSetAtom(resolutionAtom);
+  const setFrameRate = useSetAtom(frameRateAtom);
 
   const [isLoading, setIsLoading] = useState(true);
   const [isCameraAvailable, setIsCameraAvailable] = useState(false);
@@ -41,6 +43,10 @@ const App = () => {
     const resolution = storage.getVideoResolution();
     if (resolution) {
       setResolution(resolution);
+    }
+    const frameRate = storage.getVideoFrameRate();
+    if (frameRate) {
+      setFrameRate(frameRate);
     }
 
     requestMediaPermissions(resolution);
