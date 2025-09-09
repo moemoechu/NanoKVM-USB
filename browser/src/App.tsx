@@ -24,6 +24,8 @@ import { device } from '@/libs/device';
 import * as storage from '@/libs/storage';
 import type { Resolution } from '@/types.ts';
 
+import { InfoPanel } from './components/info-panel';
+
 const App = () => {
   const { t } = useTranslation();
   const isBigScreen = useMediaQuery({ minWidth: 850 });
@@ -107,6 +109,7 @@ const App = () => {
       {videoState === 'connected' && (
         <>
           <Menu />
+          <InfoPanel />
 
           {serialState === 'notSupported' && (
             <Alert message={t('serial.notSupported')} type="warning" banner closable />

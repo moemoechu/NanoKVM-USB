@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Divider } from 'antd';
 import clsx from 'clsx';
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { MenuIcon, XIcon } from 'lucide-react';
 
-import { serialStateAtom } from '@/jotai/device.ts';
+import { isShowInfoAtom, serialStateAtom } from '@/jotai/device.ts';
 import * as storage from '@/libs/storage';
 
 import { Fullscreen } from './fullscreen';
@@ -17,11 +17,15 @@ import { Video } from './video';
 export const Menu = () => {
   const serialState = useAtomValue(serialStateAtom);
 
+  const setIsShowInfo = useSetAtom(isShowInfoAtom);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const isOpen = storage.getIsMenuOpen();
     setIsMenuOpen(isOpen);
+    const isShow = storage.getIsShowInfo();
+    setIsShowInfo(isShow);
   }, []);
 
   function toggleMenu() {

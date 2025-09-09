@@ -15,6 +15,8 @@ const VIDEO_BRIGHTNESS_KEY = 'nanokvm-usb-video-brightness';
 const VIDEO_CONTRAST_KEY = 'nanokvm-usb-video-contrast';
 const VIDEO_SATURATION_KEY = 'nanokvm-usb-video-saturation';
 
+const IS_SHOW_INFO_KEY = 'nanokvm-usb-is-show-info';
+
 export function getLanguage() {
   return localStorage.getItem(LANGUAGE_KEY);
 }
@@ -162,4 +164,17 @@ export function getVideoSaturation() {
 
 export function setVideoSaturation(value: number) {
   localStorage.setItem(VIDEO_SATURATION_KEY, String(value));
+}
+
+
+export function getIsShowInfo(): boolean {
+  const state = localStorage.getItem(IS_SHOW_INFO_KEY);
+  if (!state) {
+    return false;
+  }
+  return state === 'true';
+}
+
+export function setIsShowInfo(isOpen: boolean) {
+  localStorage.setItem(IS_SHOW_INFO_KEY, isOpen ? 'true' : 'false');
 }

@@ -15,9 +15,11 @@ export const videoBrightnessAtom = atom<number>(50);
 export const videoContrastAtom = atom<number>(50);
 export const videoSaturationAtom = atom<number>(50);
 
-export const videoScaleAtom = atom<number>(1.0)
+export const videoScaleAtom = atom<number>(1.0);
 
 export const videoDeviceIdAtom = atom('');
 export const videoStateAtom = atom<VideoState>('disconnected');
 
 export const serialStateAtom = atom<SerialState>('disconnected');
+
+export const isShowInfoAtom = atom<boolean>(false);
