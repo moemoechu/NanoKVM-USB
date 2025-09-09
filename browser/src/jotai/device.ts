@@ -11,6 +11,9 @@ export const resolutionAtom = atom<Resolution>({
 });
 
 export const frameRateAtom = atom<number>(30);
+export const videoBrightnessAtom = atom<number>(50);
+export const videoContrastAtom = atom<number>(50);
+export const videoSaturationAtom = atom<number>(50);
 
 export const videoScaleAtom = atom<number>(1.0)
 

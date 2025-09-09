@@ -11,6 +11,9 @@ const MOUSE_STYLE_KEY = 'nanokvm-usb-mouse-style';
 const MOUSE_MODE_KEY = 'nanokvm-usb-mouse-mode';
 const MOUSE_SCROLL_DIRECTION_KEY = 'nanokvm-usb-mouse-scroll-direction';
 const MOUSE_SCROLL_INTERVAL_KEY = 'nanokvm-usb-mouse-scroll-interval';
+const VIDEO_BRIGHTNESS_KEY = 'nanokvm-usb-video-brightness';
+const VIDEO_CONTRAST_KEY = 'nanokvm-usb-video-contrast';
+const VIDEO_SATURATION_KEY = 'nanokvm-usb-video-saturation';
 
 export function getLanguage() {
   return localStorage.getItem(LANGUAGE_KEY);
@@ -130,4 +133,33 @@ export function getMouseScrollInterval(): number | null {
 
 export function setMouseScrollInterval(interval: number): void {
   localStorage.setItem(MOUSE_SCROLL_INTERVAL_KEY, String(interval));
+}
+
+export function getVideoBrightness() {
+  const item = localStorage.getItem(VIDEO_BRIGHTNESS_KEY);
+  if (!item) return;
+  return Number(item);
+}
+
+export function setVideoBrightness(value: number) {
+  localStorage.setItem(VIDEO_BRIGHTNESS_KEY, String(value));
+}
+
+export function getVideoContrast() {
+  const item = localStorage.getItem(VIDEO_CONTRAST_KEY);
+  if (!item) return;
+  return Number(item);
+}
+
+export function setVideoContrast(value: number) {
+  localStorage.setItem(VIDEO_CONTRAST_KEY, String(value));
+}
+export function getVideoSaturation() {
+  const item = localStorage.getItem(VIDEO_SATURATION_KEY);
+  if (!item) return;
+  return Number(item);
+}
+
+export function setVideoSaturation(value: number) {
+  localStorage.setItem(VIDEO_SATURATION_KEY, String(value));
 }

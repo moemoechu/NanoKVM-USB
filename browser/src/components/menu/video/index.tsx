@@ -1,16 +1,22 @@
 import { Popover } from 'antd';
 import { MonitorIcon } from 'lucide-react';
 
+import { Brightness } from './brightness.tsx';
 import { Device } from './device.tsx';
 import { FrameRate } from './frame-rate.tsx';
 import { Resolution } from './resolution.tsx';
 import { Scale } from './scale.tsx';
+import { Contrast } from './contrast.tsx';
+import { Saturation } from './saturation.tsx';
 
 export const Video = () => {
   const content = (
     <div className="flex flex-col space-y-1">
       <Resolution />
       <FrameRate />
+      <Brightness />
+      <Contrast />
+      <Saturation />
       <Scale />
       <Device />
     </div>

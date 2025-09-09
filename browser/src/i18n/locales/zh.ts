@@ -23,6 +23,9 @@ const zh = {
     video: {
       resolution: '分辨率',
       frameRate: '帧率',
+      brightness: '亮度',
+      contrast: '对比度',
+      saturation: '饱和度',
       scale: '缩放',
       customResolution: '自定义',
       device: '设备',

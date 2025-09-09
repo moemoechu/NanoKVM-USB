@@ -25,6 +25,9 @@ const en = {
     video: {
       resolution: 'Resolution',
       frameRate: 'Frame Rate',
+      brightness: 'Brightness',
+      contrast: 'Contrast',
+      saturation: 'Saturation',
       scale: 'Scale',
       customResolution: 'Custom',
       device: 'Device',
