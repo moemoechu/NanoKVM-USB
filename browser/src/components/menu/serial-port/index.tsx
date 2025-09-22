@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { CpuIcon, Loader2Icon } from 'lucide-react';
 
 import { device } from '@/libs/device';
+import { setLastSerialPortInfo } from '@/libs/storage';
 
 export const SerialPort = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,6 +13,7 @@ export const SerialPort = () => {
 
     try {
       const port = await navigator.serial.requestPort();
+      setLastSerialPortInfo(port.getInfo());
       await device.serialPort.init(port);
     } finally {
       setIsLoading(false);

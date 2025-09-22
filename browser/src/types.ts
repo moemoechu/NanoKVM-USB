@@ -9,3 +9,8 @@ export type MediaDevice = {
   audioId?: string;
   audioName?: string;
 };
+
+export type PortInfo = {
+  usbProductId: number;
+  usbVendorId: number;
+};

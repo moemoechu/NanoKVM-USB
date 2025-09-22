@@ -37,6 +37,14 @@ export const Video = ({ setErrMsg }: VideoProps) => {
     getDevices();
   }, []);
 
+  useEffect(() => {
+    const videoId = storage.getVideoDevice();
+    if (videoId) {
+      setVideoDeviceId(videoId);
+      selectVideo(videoId);
+    }
+  }, [devices]);
+
   async function getDevices() {
     try {
       const allDevices = await navigator.mediaDevices.enumerateDevices();

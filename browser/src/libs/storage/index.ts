@@ -1,4 +1,4 @@
-import type { Resolution } from '@/types';
+import type { PortInfo, Resolution } from '@/types';
 
 const LANGUAGE_KEY = 'nanokvm-usb-language';
 const VIDEO_DEVICE_ID_KEY = 'nanokvm-usb-video-device-id';
@@ -16,6 +16,8 @@ const VIDEO_CONTRAST_KEY = 'nanokvm-usb-video-contrast';
 const VIDEO_SATURATION_KEY = 'nanokvm-usb-video-saturation';
 
 const IS_SHOW_INFO_KEY = 'nanokvm-usb-is-show-info';
+
+const LAST_SERIAL_PORT_INFO_KEY = 'nanokvm-usb-last-serial-port-info';
 
 export function getLanguage() {
   return localStorage.getItem(LANGUAGE_KEY);
@@ -166,7 +168,6 @@ export function setVideoSaturation(value: number) {
   localStorage.setItem(VIDEO_SATURATION_KEY, String(value));
 }
 
-
 export function getIsShowInfo(): boolean {
   const state = localStorage.getItem(IS_SHOW_INFO_KEY);
   if (!state) {
@@ -177,4 +178,14 @@ export function getIsShowInfo(): boolean {
 
 export function setIsShowInfo(isOpen: boolean) {
   localStorage.setItem(IS_SHOW_INFO_KEY, isOpen ? 'true' : 'false');
+}
+
+export function getLastSerialPortInfo() {
+  const port = localStorage.getItem(LAST_SERIAL_PORT_INFO_KEY);
+  if (!port) return;
+  return window.JSON.parse(port) as PortInfo;
+}
+
+export function setLastSerialPortInfo(portInfo: PortInfo) {
+  localStorage.setItem(LAST_SERIAL_PORT_INFO_KEY, window.JSON.stringify(portInfo));
 }
