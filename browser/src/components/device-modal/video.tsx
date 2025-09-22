@@ -6,7 +6,10 @@ import { useTranslation } from 'react-i18next';
 import {
   frameRateAtom,
   resolutionAtom,
+  videoBrightnessAtom,
+  videoContrastAtom,
   videoDeviceIdAtom,
+  videoSaturationAtom,
   videoStateAtom
 } from '@/jotai/device.ts';
 import { camera } from '@/libs/camera';
@@ -24,6 +27,9 @@ export const Video = ({ setErrMsg }: VideoProps) => {
   const frameRate = useAtomValue(frameRateAtom);
   const [videoDeviceId, setVideoDeviceId] = useAtom(videoDeviceIdAtom);
   const [videoState, setVideoState] = useAtom(videoStateAtom);
+  const brightness = useAtomValue(videoBrightnessAtom);
+  const contrast = useAtomValue(videoContrastAtom);
+  const saturation = useAtomValue(videoSaturationAtom);
 
   const [devices, setDevices] = useState<MediaDevice[]>([]);
 
@@ -80,7 +86,11 @@ export const Video = ({ setErrMsg }: VideoProps) => {
     setErrMsg('');
 
     try {
-      await camera.open(videoId, resolution.width, resolution.height, frameRate, device.audioId);
+      await camera.open(videoId, resolution.width, resolution.height, frameRate, device.audioId, {
+        brightness,
+        contrast,
+        saturation
+      });
     } catch (err) {
       console.log(err);
       setErrMsg(t('camera.failed'));

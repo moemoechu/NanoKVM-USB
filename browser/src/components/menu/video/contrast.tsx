@@ -38,7 +38,7 @@ export const Contrast = (): ReactElement => {
   }, 300);
 
   const content = (
-    <div className="h-[150px] w-[60px] py-3">
+    <div className="h-[300px] w-[60px] py-3">
       <Slider
         vertical
         marks={{

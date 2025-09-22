@@ -14,6 +14,9 @@ import {
   frameRateAtom,
   resolutionAtom,
   serialStateAtom,
+  videoBrightnessAtom,
+  videoContrastAtom,
+  videoSaturationAtom,
   videoScaleAtom,
   videoStateAtom
 } from '@/jotai/device.ts';
@@ -38,6 +41,9 @@ const App = () => {
   const setResolution = useSetAtom(resolutionAtom);
   const setFrameRate = useSetAtom(frameRateAtom);
   const setScale = useSetAtom(videoScaleAtom);
+  const setBrightness = useSetAtom(videoBrightnessAtom);
+  const setContrast = useSetAtom(videoContrastAtom);
+  const setSaturation = useSetAtom(videoSaturationAtom);
 
   const [isLoading, setIsLoading] = useState(true);
   const [isCameraAvailable, setIsCameraAvailable] = useState(false);
@@ -54,6 +60,18 @@ const App = () => {
     const scale = storage.getVideoScale();
     if (scale) {
       setScale(scale);
+    }
+    const brightness = storage.getVideoBrightness();
+    if (brightness) {
+      setBrightness(brightness);
+    }
+    const contrast = storage.getVideoContrast();
+    if (contrast) {
+      setContrast(contrast);
+    }
+    const saturation = storage.getVideoSaturation();
+    if (saturation) {
+      setSaturation(saturation);
     }
 
     requestMediaPermissions(resolution);
@@ -136,6 +154,7 @@ const App = () => {
         }}
         autoPlay
         playsInline
+        disablePictureInPicture
       />
 
       <VirtualKeyboard isBigScreen={isBigScreen} />

@@ -5,7 +5,14 @@ import { useAtom, useAtomValue } from 'jotai';
 import { VideoIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-import { frameRateAtom, resolutionAtom, videoDeviceIdAtom } from '@/jotai/device.ts';
+import {
+  frameRateAtom,
+  resolutionAtom,
+  videoBrightnessAtom,
+  videoContrastAtom,
+  videoDeviceIdAtom,
+  videoSaturationAtom
+} from '@/jotai/device.ts';
 import { camera } from '@/libs/camera';
 import * as storage from '@/libs/storage';
 import type { MediaDevice } from '@/types';
@@ -16,6 +23,9 @@ export const Device = () => {
   const resolution = useAtomValue(resolutionAtom);
   const frameRate = useAtomValue(frameRateAtom);
   const [videoDeviceId, setVideoDeviceId] = useAtom(videoDeviceIdAtom);
+  const brightness = useAtomValue(videoBrightnessAtom);
+  const contrast = useAtomValue(videoContrastAtom);
+  const saturation = useAtomValue(videoSaturationAtom);
 
   const [devices, setDevices] = useState<MediaDevice[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -65,7 +75,12 @@ export const Device = () => {
         resolution.width,
         resolution.height,
         frameRate,
-        device.audioId
+        device.audioId,
+        {
+          brightness,
+          contrast,
+          saturation
+        }
       );
 
       const video = document.getElementById('video') as HTMLVideoElement;
