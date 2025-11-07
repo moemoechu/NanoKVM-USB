@@ -18,6 +18,7 @@ const VIDEO_SATURATION_KEY = 'nanokvm-usb-video-saturation';
 const IS_SHOW_INFO_KEY = 'nanokvm-usb-is-show-info';
 
 const LAST_SERIAL_PORT_INFO_KEY = 'nanokvm-usb-last-serial-port-info';
+const MOUSE_JIGGLER_MODE_KEY = 'nanokvm-usb-mouse-jiggler-mode';
 
 export function getLanguage() {
   return localStorage.getItem(LANGUAGE_KEY);
@@ -188,4 +189,11 @@ export function getLastSerialPortInfo() {
 
 export function setLastSerialPortInfo(portInfo: PortInfo) {
   localStorage.setItem(LAST_SERIAL_PORT_INFO_KEY, window.JSON.stringify(portInfo));
+export function getMouseJigglerMode(): string {
+  const jiggler = localStorage.getItem(MOUSE_JIGGLER_MODE_KEY);
+  return jiggler && jiggler === 'enable' ? 'enable' : 'disable';
+}
+
+export function setMouseJigglerMode(jiggler: string): void {
+  localStorage.setItem(MOUSE_JIGGLER_MODE_KEY, jiggler);
 }

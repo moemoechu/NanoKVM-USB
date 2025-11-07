@@ -38,7 +38,10 @@ const nl = {
       keyboard: {
         paste: 'Plakken',
         virtualKeyboard: 'Virtueel toetsenbord',
-        ctrlAltDel: 'Ctrl + Alt + Delete'
+        shortcuts: 'Sneltoetsen',
+        ctrlAltDel: 'Ctrl + Alt + Delete',
+        ctrlD: 'Ctrl + D',
+        winTab: 'Win + Tab',
       },
       mouse: {
         cursor: {
