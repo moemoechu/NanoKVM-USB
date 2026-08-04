@@ -6,6 +6,12 @@ import { VideoIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import { resolutionAtom, videoDeviceIdAtom } from '@/jotai/device.ts';
+import {
+  frameRateAtom,
+  videoBrightnessAtom,
+  videoContrastAtom,
+  videoSaturationAtom
+} from '@/jotai/device.ts';
 import { camera } from '@/libs/media/camera';
 import * as storage from '@/libs/storage';
 import type { MediaDevice } from '@/types';
@@ -15,6 +21,10 @@ export const Device = () => {
 
   const resolution = useAtomValue(resolutionAtom);
   const [videoDeviceId, setVideoDeviceId] = useAtom(videoDeviceIdAtom);
+  const frameRate = useAtomValue(frameRateAtom);
+  const brightness = useAtomValue(videoBrightnessAtom);
+  const contrast = useAtomValue(videoContrastAtom);
+  const saturation = useAtomValue(videoSaturationAtom);
 
   const [devices, setDevices] = useState<MediaDevice[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -59,7 +69,12 @@ export const Device = () => {
     setIsLoading(true);
 
     try {
-      await camera.open(device.videoId, resolution.width, resolution.height, device.audioId);
+      await camera.open(device.videoId, resolution.width, resolution.height, device.audioId, {
+        frameRate,
+        brightness,
+        contrast,
+        saturation
+      });
 
       const video = document.getElementById('video') as HTMLVideoElement;
       if (!video) return;

@@ -3,25 +3,25 @@ trailingComma: none
 printWidth: 100
 tabWidth: 2
 bracketSpacing: true
-importOrder:
-  - ^(react/(.*)$)|^(react$)
-  - ^(next/(.*)$)|^(next$)
-  - <THIRD_PARTY_MODULES>
-  - ''
-  - ^types$
-  - ^@/(.*)$
-  - ''
-  - '^[./]'
-importOrderSeparation: false
-importOrderSortSpecifiers: true
-importOrderBuiltinModulesToTop: true
-importOrderParserPlugins:
-  - typescript
-  - jsx
-  - tsx
-  - decorators-legacy
-importOrderMergeDuplicateImports: true
-importOrderCombineTypeAndValueImports: true
+# importOrder:
+#   - ^(react/(.*)$)|^(react$)
+#   - ^(next/(.*)$)|^(next$)
+#   - <THIRD_PARTY_MODULES>
+#   - ''
+#   - ^types$
+#   - ^@/(.*)$
+#   - ''
+#   - '^[./]'
+# importOrderSeparation: false
+# importOrderSortSpecifiers: true
+# importOrderBuiltinModulesToTop: true
+# importOrderParserPlugins:
+#   - typescript
+#   - jsx
+#   - tsx
+#   - decorators-legacy
+# importOrderMergeDuplicateImports: true
+# importOrderCombineTypeAndValueImports: true
 plugins:
-  - '@ianvs/prettier-plugin-sort-imports'
+  # - '@ianvs/prettier-plugin-sort-imports'
   - prettier-plugin-tailwindcss

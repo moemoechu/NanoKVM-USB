@@ -17,6 +17,12 @@ import {
   videoScaleAtom,
   videoStateAtom
 } from '@/jotai/device.ts';
+import {
+  frameRateAtom,
+  videoBrightnessAtom,
+  videoContrastAtom,
+  videoSaturationAtom
+} from '@/jotai/device.ts';
 import { isKeyboardEnableAtom } from '@/jotai/keyboard.ts';
 import { mouseStyleAtom } from '@/jotai/mouse.ts';
 import { device } from '@/libs/device';
@@ -24,6 +30,8 @@ import { camera } from '@/libs/media/camera';
 import { checkPermission, requestCameraPermission } from '@/libs/media/permission.ts';
 import * as storage from '@/libs/storage';
 import type { Resolution } from '@/types.ts';
+
+import { InfoPanel } from './components/info-panel';
 
 const App = () => {
   const { t } = useTranslation();
@@ -37,6 +45,12 @@ const App = () => {
   const setResolution = useSetAtom(resolutionAtom);
   const [videoRotation, setVideoRotation] = useAtom(videoRotationAtom);
 
+  const setFrameRate = useSetAtom(frameRateAtom);
+  // const setScale = useSetAtom(videoScaleAtom);
+  const setBrightness = useSetAtom(videoBrightnessAtom);
+  const setContrast = useSetAtom(videoContrastAtom);
+  const setSaturation = useSetAtom(videoSaturationAtom);
+
   const [isLoading, setIsLoading] = useState(true);
   const [isCameraGranted, setIsCameraGranted] = useState(false);
   const [shouldSwapDimensions, setShouldSwapDimensions] = useState(false);
@@ -44,6 +58,13 @@ const App = () => {
   useEffect(() => {
     initResolution();
     initRotation();
+    initFrameRate();
+    initBCS();
+
+    // const scale = storage.getVideoScale();
+    // if (scale) {
+    //   setScale(scale);
+    // }
 
     return () => {
       camera.close();
@@ -95,6 +116,28 @@ const App = () => {
     }
   }
 
+  function initFrameRate() {
+    const frameRate = storage.getVideoFrameRate();
+    if (frameRate) {
+      setFrameRate(frameRate);
+    }
+  }
+
+  function initBCS() {
+    const brightness = storage.getVideoBrightness();
+    if (brightness) {
+      setBrightness(brightness);
+    }
+    const contrast = storage.getVideoContrast();
+    if (contrast) {
+      setContrast(contrast);
+    }
+    const saturation = storage.getVideoSaturation();
+    if (saturation) {
+      setSaturation(saturation);
+    }
+  }
+
   async function requestPermission(resolution?: Resolution) {
     try {
       const isGranted = await checkPermission('camera');
@@ -133,6 +176,7 @@ const App = () => {
       {videoState === 'connected' && (
         <>
           <Menu />
+          <InfoPanel />
 
           {serialState === 'notSupported' && (
             <Alert message={t('serial.notSupported')} type="warning" banner closable />
@@ -157,6 +201,7 @@ const App = () => {
         style={videoStyle as CSSProperties}
         autoPlay
         playsInline
+        disablePictureInPicture
       />
 
       <VirtualKeyboard isBigScreen={isBigScreen} />

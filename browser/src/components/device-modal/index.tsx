@@ -8,6 +8,7 @@ import { camera } from '@/libs/media/camera.ts';
 
 import { SerialPort } from './serial-port';
 import { Video } from './video';
+import { Button } from 'antd';
 
 export const DeviceModal = () => {
   const { t } = useTranslation();
@@ -43,6 +44,9 @@ export const DeviceModal = () => {
       <div className="flex flex-col items-center justify-center space-y-5 py-10">
         <Video setErrMsg={setErrMsg} />
         <SerialPort setErrMsg={setErrMsg} onDisconnect={disconnect} />
+        <Button type="primary" className="w-[250px]" onClick={() => setIsOpen(false)}>
+          查看模式
+        </Button>
 
         {errMsg && <span className="text-xs text-red-500">{errMsg}</span>}
       </div>

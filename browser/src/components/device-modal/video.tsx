@@ -4,6 +4,12 @@ import { useAtom, useAtomValue } from 'jotai';
 import { useTranslation } from 'react-i18next';
 
 import { resolutionAtom, videoDeviceIdAtom, videoStateAtom } from '@/jotai/device.ts';
+import {
+  frameRateAtom,
+  videoBrightnessAtom,
+  videoContrastAtom,
+  videoSaturationAtom
+} from '@/jotai/device.ts';
 import { camera } from '@/libs/media/camera';
 import * as storage from '@/libs/storage';
 import type { MediaDevice } from '@/types';
@@ -18,12 +24,24 @@ export const Video = ({ setErrMsg }: VideoProps) => {
   const resolution = useAtomValue(resolutionAtom);
   const [videoDeviceId, setVideoDeviceId] = useAtom(videoDeviceIdAtom);
   const [videoState, setVideoState] = useAtom(videoStateAtom);
+  const frameRate = useAtomValue(frameRateAtom);
+  const brightness = useAtomValue(videoBrightnessAtom);
+  const contrast = useAtomValue(videoContrastAtom);
+  const saturation = useAtomValue(videoSaturationAtom);
 
   const [devices, setDevices] = useState<MediaDevice[]>([]);
 
   useEffect(() => {
     getDevices();
   }, []);
+
+  useEffect(() => {
+    const videoId = storage.getVideoDevice();
+    if (videoId) {
+      setVideoDeviceId(videoId);
+      selectVideo(videoId);
+    }
+  }, [devices]);
 
   async function getDevices() {
     try {
@@ -74,7 +92,12 @@ export const Video = ({ setErrMsg }: VideoProps) => {
     setErrMsg('');
 
     try {
-      await camera.open(videoId, resolution.width, resolution.height, device.audioId);
+      await camera.open(videoId, resolution.width, resolution.height, device.audioId, {
+        frameRate,
+        brightness,
+        contrast,
+        saturation
+      });
     } catch (err) {
       console.log(err);
       setErrMsg(t('camera.failed'));

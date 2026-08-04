@@ -18,3 +18,9 @@ export const videoDeviceIdAtom = atom('');
 export const videoStateAtom = atom<VideoState>('disconnected');
 
 export const serialStateAtom = atom<SerialState>('disconnected');
+
+export const frameRateAtom = atom<number>(30);
+export const videoBrightnessAtom = atom<number>(50);
+export const videoContrastAtom = atom<number>(50);
+export const videoSaturationAtom = atom<number>(50);
+export const isShowInfoAtom = atom<boolean>(false);

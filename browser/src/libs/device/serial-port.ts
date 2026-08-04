@@ -134,6 +134,8 @@ export class SerialPort {
         await new Promise((resolve) => setTimeout(resolve, delayAfterRead));
       }
 
+      console.log(result);
+
       return result;
     } catch (err) {
       if (isDisconnectError(err)) {

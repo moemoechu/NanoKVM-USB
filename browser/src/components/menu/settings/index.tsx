@@ -2,6 +2,11 @@ import { Popover } from 'antd';
 import { BookIcon, DownloadIcon, SettingsIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
+import { useAtom } from 'jotai';
+import { BadgeInfo } from 'lucide-react';
+import { isShowInfoAtom } from '@/jotai/device.ts';
+import * as storage from '@/libs/storage';
+
 import { Language } from './language.tsx';
 
 export const Settings = () => {
@@ -9,6 +14,14 @@ export const Settings = () => {
 
   function openPage(url: string) {
     window.open(url, '_blank');
+  }
+
+  const [isShowInfo, setIsShowInfo] = useAtom(isShowInfoAtom);
+  function toggleInfoPanel() {
+    const isShow = !isShowInfo;
+
+    setIsShowInfo(isShow);
+    storage.setIsShowInfo(isShow);
   }
 
   const content = (
@@ -29,6 +42,13 @@ export const Settings = () => {
       >
         <DownloadIcon size={16} />
         <span>{t('settings.download')}</span>
+      </div>
+      <div
+        className="flex h-[30px] cursor-pointer items-center space-x-2 rounded px-3 text-neutral-300 hover:bg-neutral-700"
+        onClick={toggleInfoPanel}
+      >
+        <BadgeInfo size={18} />
+        <span>切换信息窗格</span>
       </div>
     </div>
   );

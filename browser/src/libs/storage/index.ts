@@ -1,4 +1,5 @@
 import type { Resolution, Rotation } from '@/types';
+import type { PortInfo } from '@/types';
 
 const LANGUAGE_KEY = 'nanokvm-usb-language';
 const VIDEO_DEVICE_ID_KEY = 'nanokvm-usb-video-device-id';
@@ -13,6 +14,13 @@ const MOUSE_SCROLL_DIRECTION_KEY = 'nanokvm-usb-mouse-scroll-direction';
 const MOUSE_SCROLL_INTERVAL_KEY = 'nanokvm-usb-mouse-scroll-interval';
 const MOUSE_JIGGLER_MODE_KEY = 'nanokvm-usb-mouse-jiggler-mode';
 const KEYBOARD_SHORTCUT_KEY = 'nanokvm-usb-keyboard-shortcut';
+
+const VIDEO_FRAMERATE_KEY = 'nanokvm-usb-video-framerate';
+const VIDEO_BRIGHTNESS_KEY = 'nanokvm-usb-video-brightness';
+const VIDEO_CONTRAST_KEY = 'nanokvm-usb-video-contrast';
+const VIDEO_SATURATION_KEY = 'nanokvm-usb-video-saturation';
+const IS_SHOW_INFO_KEY = 'nanokvm-usb-is-show-info';
+const LAST_SERIAL_PORT_INFO_KEY = 'nanokvm-usb-last-serial-port-info';
 
 export function getLanguage() {
   return localStorage.getItem(LANGUAGE_KEY);
@@ -154,4 +162,64 @@ export function getMouseJigglerMode(): 'enable' | 'disable' {
 
 export function setMouseJigglerMode(jiggler: 'enable' | 'disable'): void {
   localStorage.setItem(MOUSE_JIGGLER_MODE_KEY, jiggler);
+}
+
+export function getVideoFrameRate() {
+  const frameRate = localStorage.getItem(VIDEO_FRAMERATE_KEY);
+  if (!frameRate) return;
+  return Number(frameRate);
+}
+
+export function setVideoFrameRate(frameRate: number) {
+  localStorage.setItem(VIDEO_FRAMERATE_KEY, String(frameRate));
+}
+export function getVideoBrightness() {
+  const item = localStorage.getItem(VIDEO_BRIGHTNESS_KEY);
+  if (!item) return;
+  return Number(item);
+}
+
+export function setVideoBrightness(value: number) {
+  localStorage.setItem(VIDEO_BRIGHTNESS_KEY, String(value));
+}
+
+export function getVideoContrast() {
+  const item = localStorage.getItem(VIDEO_CONTRAST_KEY);
+  if (!item) return;
+  return Number(item);
+}
+
+export function setVideoContrast(value: number) {
+  localStorage.setItem(VIDEO_CONTRAST_KEY, String(value));
+}
+export function getVideoSaturation() {
+  const item = localStorage.getItem(VIDEO_SATURATION_KEY);
+  if (!item) return;
+  return Number(item);
+}
+
+export function setVideoSaturation(value: number) {
+  localStorage.setItem(VIDEO_SATURATION_KEY, String(value));
+}
+
+export function getIsShowInfo(): boolean {
+  const state = localStorage.getItem(IS_SHOW_INFO_KEY);
+  if (!state) {
+    return false;
+  }
+  return state === 'true';
+}
+
+export function setIsShowInfo(isOpen: boolean) {
+  localStorage.setItem(IS_SHOW_INFO_KEY, isOpen ? 'true' : 'false');
+}
+
+export function getLastSerialPortInfo() {
+  const port = localStorage.getItem(LAST_SERIAL_PORT_INFO_KEY);
+  if (!port) return;
+  return window.JSON.parse(port) as PortInfo;
+}
+
+export function setLastSerialPortInfo(portInfo: PortInfo) {
+  localStorage.setItem(LAST_SERIAL_PORT_INFO_KEY, window.JSON.stringify(portInfo));
 }

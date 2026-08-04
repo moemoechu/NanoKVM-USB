@@ -30,7 +30,7 @@ export const Paste = () => {
         }
 
         await send(modifier, code);
-        await new Promise((r) => setTimeout(r, 50));
+        // await new Promise((r) => setTimeout(r, 5));
         await send(0, 0);
       }
     } catch (e) {

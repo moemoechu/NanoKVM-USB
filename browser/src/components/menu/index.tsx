@@ -16,9 +16,13 @@ import { Recorder } from './recorder';
 import { SerialPort } from './serial-port';
 import { Settings } from './settings';
 import { Video } from './video';
+import { useSetAtom } from 'jotai';
+import { isShowInfoAtom } from '@/jotai/device.ts';
 
 export const Menu = () => {
   const serialState = useAtomValue(serialStateAtom);
+
+  const setIsShowInfo = useSetAtom(isShowInfoAtom);
 
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [menuBounds, setMenuBounds] = useState({ left: 0, right: 0, top: 0, bottom: 0 });
@@ -40,6 +44,8 @@ export const Menu = () => {
   }, []);
 
   useEffect(() => {
+    const isShow = storage.getIsShowInfo();
+    setIsShowInfo(isShow);
     const isOpen = storage.getIsMenuOpen();
     setIsMenuOpen(isOpen);
 
@@ -52,6 +58,8 @@ export const Menu = () => {
 
   useEffect(() => {
     handleResize();
+    const isShow = storage.getIsShowInfo();
+    setIsShowInfo(isShow);
   }, [isMenuOpen, serialState, handleResize]);
 
   function toggleMenu() {
